@@ -3,6 +3,11 @@ import React from "react";
 import tw from "twrnc";
 import ProgramCard from "../components/programCard";
 import Animated, { SlideOutDown, SlideInUp } from "react-native-reanimated";
+import { Dimensions } from "react-native";
+import ScalableText from "react-native-text";
+const { width } = Dimensions.get("window");
+
+const scale = width / 360;
 
 const HomeScreen = ({ navigation }) => {
   let dim;

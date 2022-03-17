@@ -10,6 +10,11 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import ProgramDetails from "../components/programDetails";
+import { Dimensions } from "react-native";
+import ScalableText from "react-native-text";
+const { width } = Dimensions.get("window");
+
+const scale = width / 360;
 
 const ProgramScreen = ({ navigation, route }) => {
   const entering = (target) => {
@@ -33,27 +38,35 @@ const ProgramScreen = ({ navigation, route }) => {
       style={[tw`flex flex-col justify-start h-full`]}
     >
       <View
-        style={tw`w-full h-1/8 flex flex-row bg-gray-300 justify-start items-center px-4 py-2 pt-10`}
+        style={[
+          tw`w-full flex flex-row bg-gray-300 justify-start items-center px-4 py-2 pt-10`,
+          { height: "15%" },
+        ]}
       >
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
           }}
-          style={tw`w-1/5  ml-2`}
+          style={tw`w-1/5 ml-2`}
         >
           <Icon style={tw`text-3xl `} name="angle-left" />
         </TouchableOpacity>
-        <Text style={tw`text-lg font-bold pb-0`}>My Program</Text>
+        <ScalableText style={tw`text-lg font-bold pb-0`}>
+          My Program
+        </ScalableText>
       </View>
       <Animated.View
         entering={entering}
         // entering={SlideInDown.duration(1500)}
-        style={[tw``]}
+        style={[tw`flex `, { height: "85%" }]}
       >
-        <View style={[tw`w-full bg-gray-300 rounded-b-2xl`]}>
+        <View style={[tw`flex bg-gray-300 rounded-b-2xl`, { height: "25%" }]}>
           <ProgramCard />
         </View>
-        <Animated.View entering={FadeIn.delay(800)}>
+        <Animated.View
+          entering={FadeIn.delay(800)}
+          style={[tw``, { height: "70%" }]}
+        >
           <ProgramDetails />
         </Animated.View>
       </Animated.View>
